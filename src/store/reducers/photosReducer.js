@@ -10,23 +10,38 @@ const photosMapper = photo => {
 
 const photosReducer = (state = {
     fetching: false,
+    fetchingMore: false,
     fetched: false,
     error: null,
     photos: []
 }, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case 'FETCH_PHOTOS_PENDING':
-            return {...state, fetching: true}
+            return { ...state, fetching: true }
         case 'FETCH_PHOTOS_REJECTED':
-            return {...state, fetching: false, error: action.payload}
+            return { ...state, fetching: false, error: action.payload }
         case 'FETCH_PHOTOS_FULFILLED':
-            return {...state,
-                    fetching: false,
-                    fetched: true,
-                    page: action.payload.data.photos.page,
-                    total_pages: action.payload.data.photos.pages,
-                    photos: action.payload.data.photos.photo.map(photosMapper)
-                }
+            return {
+                ...state,
+                fetching: false,
+                fetched: true,
+                page: action.payload.data.photos.page,
+                total_pages: action.payload.data.photos.pages,
+                photos: action.payload.data.photos.photo.map(photosMapper)
+            }
+
+        case 'FETCH_MORE_PHOTOS_PENDING':
+            return { ...state, fetchingMore: true }
+        case 'FETCH_MORE_PHOTOS_REJECTED':
+            return { ...state, fetchingMore: false, error: action.payload }
+        case 'FETCH_MORE_PHOTOS_FULFILLED':
+            return {
+                ...state,
+                fetchingMore: false,
+                page: action.payload.data.photos.page,
+                total_pages: action.payload.data.photos.pages,
+                photos: [...state.photos, ...action.payload.data.photos.photo.map(photosMapper)]
+            }
     }
     return state;
 };

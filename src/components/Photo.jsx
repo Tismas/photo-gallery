@@ -38,7 +38,7 @@ class Photo extends Component {
                             {this.state.descriptionExtended || description.length < 203 ?
                                 description
                                 :
-                                [description.substr(0, 200), <ExtendTextButton onClick={this.extend.bind(this)} />]}
+                                [description.substr(0, 200), <ExtendTextButton key={1} onClick={this.extend.bind(this)} />]}
                         </div>
                         :
                         null

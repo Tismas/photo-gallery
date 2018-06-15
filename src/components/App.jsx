@@ -3,19 +3,35 @@ import { connect } from 'react-redux';
 
 import Photo from './Photo';
 
-import { fetchPhotos } from '../store/actions/photosActions';
+import { fetchPhotos, fetchMorePhotos } from '../store/actions/photosActions';
 
 import '../styles/app.scss';
 
 @connect(store => ({
-    photos: store.photos.photos,
-    photosFetched: store.photos.fetched,
-    photosFetching: store.photos.fetching,
-    photosFetchError: store.photos.error,
+    ...store.photos
 }))
 class App extends Component {
+    constructor() {
+        super();
+        this.handleInfiniteScroll = this.handleInfiniteScroll.bind(this);
+    }
+
     componentWillMount() {
         this.props.dispatch(fetchPhotos());
+    }
+
+    componentDidMount() {
+        window.addEventListener('scroll', this.handleInfiniteScroll);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleInfiniteScroll);
+    }
+
+    handleInfiniteScroll() {
+        if (this.props.fetching || this.props.fetchingMore) return;
+        if(document.body.scrollHeight - window.scrollY - window.innerHeight < 400)
+            this.props.dispatch(fetchMorePhotos(this.props.page + 1));
     }
 
     render() {
