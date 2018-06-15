@@ -1,0 +1,39 @@
+.photo-wrapper {
+    width: 20%;
+    min-width: 350px;
+    color: #333;
+    padding: 10px;
+    text-align: center;
+}
+
+.photo {
+    width: 100%;
+    height: 300px;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+.photo-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.photo-desc {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+.photo-author {
+    font-size: 1.1em;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.photo-date {
+    font-size: 1.1em;
+}

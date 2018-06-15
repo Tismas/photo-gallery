@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import Photo from './Photo';
+
 import { fetchPhotos } from '../store/actions/photosActions';
 
 import '../styles/app.scss';
@@ -17,19 +19,10 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
-            <div>
+            <div className="photos-container">
                 {this.props.photos.map((e, i) =>
-                    <div key={i}>
-                        <img src={e.url} />
-                        <div>
-                            <div> Title: {e.title} </div>
-                            <div> Description: {e.description} </div>
-                            <div> Author: {e.author} </div>
-                            <div> Upload Date: {e.uploadDate.toGMTString()} </div>
-                        </div>
-                    </div>
+                    e.url ? <Photo key={i} {...e} /> : null
                 )}
             </div>
         );
