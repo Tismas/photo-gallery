@@ -21,6 +21,12 @@ const photosReducer = (state = {
         case 'FETCH_PHOTOS_REJECTED':
             return { ...state, fetching: false, error: action.payload }
         case 'FETCH_PHOTOS_FULFILLED':
+            if (action.payload.data.stat == 'fail')
+                return {
+                    ...state,
+                    fetching: false,
+                    error: action.payload.data.message
+                }
             return {
                 ...state,
                 fetching: false,

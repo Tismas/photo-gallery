@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import ExtendTextButton from './common/ExtendTextButton.jsx';
+import ExtendTextButton from '../common/ExtendTextButton.jsx';
 
-import '../styles/photo.scss';
+import '../../styles/gallery/photo.scss';
 
 
 const propTypes = {
