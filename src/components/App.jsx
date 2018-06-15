@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Spinner from 'react-spinkit';
 
 import Photo from './Photo';
 
@@ -35,11 +36,20 @@ class App extends Component {
     }
 
     render() {
+        if (this.props.fetching)
+            return <Spinner name="cube-grid" className="loader-main" fadeIn="quarter" />
         return (
-            <div className="photos-container">
-                {this.props.photos.map((e, i) =>
-                    e.url ? <Photo key={i} {...e} /> : null
-                )}
+            <div>
+                <div className="photos-container">
+                    {this.props.photos.map((e, i) =>
+                        e.url ? <Photo key={i} {...e} /> : null
+                    )}
+                </div>
+                {this.props.fetchingMore ? 
+                    <Spinner name="circle" className="loader-more" fadeIn="quarter" /> 
+                    :
+                    null
+                }
             </div>
         );
     }
