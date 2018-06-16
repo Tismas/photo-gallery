@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { changeLocation } from '../../store/actions/metaActions';
+import { changeLocation, changeSearchValue } from '../../store/actions/metaActions';
 
 export default function withSubscription(WrappedComponent, action) {
     @connect(store => ({
@@ -9,7 +9,9 @@ export default function withSubscription(WrappedComponent, action) {
         fetched: store.photos.fetched,
         fetching: store.photos.fetching,
         fetchingMore: store.photos.fetchingMore,
-        lastLocation: store.meta.lastLocation
+        lastLocation: store.meta.lastLocation,
+        page: store.photos.page,
+        searchValue: store.meta.searchValue
     }))
     class Result extends Component {
         constructor() {
@@ -20,6 +22,7 @@ export default function withSubscription(WrappedComponent, action) {
         componentWillMount() {
             if (this.props.photos.length == 0 || this.props.lastLocation.pathname != this.props.location.pathname) {
                 this.props.dispatch(action({ userID: this.props.params.id }));
+                this.props.dispatch(changeSearchValue({ searchValue: '' }));
                 this.props.dispatch(changeLocation({ location: this.props.location }));
             }
         }
@@ -34,8 +37,9 @@ export default function withSubscription(WrappedComponent, action) {
 
         loadMore() {
             if (this.props.fetching || this.props.fetchingMore || !this.props.fetched) return;
-            if (document.body.scrollHeight - window.scrollY - window.innerHeight < 400)
-                this.props.dispatch(action({ page: this.props.page + 1, userID: this.props.params.id }));
+            if (document.body.scrollHeight - window.scrollY - window.innerHeight < 400) {
+                this.props.dispatch(action({ page: this.props.page + 1, userID: this.props.params.id, search: this.props.searchValue }));
+            }
         }
 
         render() {

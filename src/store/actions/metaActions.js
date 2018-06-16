@@ -4,3 +4,10 @@ export function changeLocation({ location = {} } = {}) {
         payload: location
     }
 }
+
+export function changeSearchValue({searchValue = ''} = {}) {
+    return {
+        type: "CHANGE_SEARCH_VALUE",
+        payload: searchValue
+    }
+}

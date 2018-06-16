@@ -5,17 +5,18 @@ const baseParams = {
     format: 'json',
     nojsoncallback: 1,
     per_page: 100,
-    extras: 'description, date_upload, owner_name, url_s'
+    extras: 'description, date_upload, owner_name, url_s, geo'
 }
 
-export function fetchPhotos({page=1} = {}) {
+export function fetchPhotos({page=1, search=''} = {}) {
     return {
         type: page == 1 ? "FETCH_PHOTOS" : "FETCH_MORE_PHOTOS",
         payload: axios.get('https://api.flickr.com/services/rest/', {
             params: {
                 ...baseParams,
                 method: 'flickr.photos.search',
-                text: 'dogs',
+                tags: 'dog,dogs',
+                text: search.toLowerCase(),
                 page
             }
         })

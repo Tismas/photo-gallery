@@ -5,7 +5,8 @@ const photosMapper = photo => {
         user_id: photo.owner,
         author: photo.ownername,
         title: photo.title,
-        url: photo.url_s
+        url: photo.url_s,
+        location: {lat: photo.latitude, long: photo.longitude}
     }
 }
 
