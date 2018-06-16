@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'found';
 
 import ExtendTextButton from '../common/ExtendTextButton.jsx';
 
@@ -27,7 +28,7 @@ class Photo extends Component {
     }
 
     render() {
-        const { url, title, description, author, uploadDate } = this.props;
+        const { url, title, description, author, uploadDate, user_id } = this.props;
         return (
             <div className="photo-wrapper">
                 <div style={{ background: `url(${url}` }} className="photo" />
@@ -43,7 +44,7 @@ class Photo extends Component {
                         :
                         null
                     }
-                    <div className="photo-author"> <b>Author</b>: {author} </div>
+                    <div className="photo-author"> <b>Author</b>: <Link to={'/user/' + user_id}> {author} </Link> </div>
                     <div className="photo-date"> <b>Upload Date</b>: {uploadDate.toGMTString()} </div>
                 </div>
             </div>

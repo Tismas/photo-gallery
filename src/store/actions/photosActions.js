@@ -1,33 +1,38 @@
 import axios from 'axios';
 
-export function fetchPhotos() {
+const baseParams = {
+    api_key: '1a475b8d3b2322b93260d9afa8145353',
+    format: 'json',
+    nojsoncallback: 1,
+    per_page: 100,
+    extras: 'description, date_upload, owner_name, url_s'
+}
+
+export function fetchPhotos({page=1} = {}) {
     return {
-        type: "FETCH_PHOTOS",
+        type: page == 1 ? "FETCH_PHOTOS" : "FETCH_MORE_PHOTOS",
         payload: axios.get('https://api.flickr.com/services/rest/', {
             params: {
+                ...baseParams,
                 method: 'flickr.photos.search',
-                api_key: '1a475b8d3b2322b93260d9afa8145353',
                 text: 'dogs',
-                format: 'json',
-                nojsoncallback: 1,
-                extras: 'description, date_upload, owner_name, url_s'
+                page
             }
         })
     }
 }
 
-export function fetchMorePhotos(page) {
+export function fetchUserPhotos({userID, page=1} = {}) {
+    if (!userID) throw 'userID not provided to fetchUserPhotos';
+
     return {
-        type: "FETCH_MORE_PHOTOS",
+        type: page == 1 ? "FETCH_PHOTOS" : "FETCH_MORE_PHOTOS",
         payload: axios.get('https://api.flickr.com/services/rest/', {
             params: {
-                method: 'flickr.photos.search',
-                api_key: '1a475b8d3b2322b93260d9afa8145353',
-                text: 'dogs',
-                format: 'json',
-                nojsoncallback: 1,
-                page,
-                extras: 'description, date_upload, owner_name, url_s'
+                ...baseParams,
+                method: 'flickr.people.getPhotos',
+                user_id: userID,
+                page
             }
         })
     }
