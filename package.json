@@ -16,12 +16,14 @@
     "axios": "^0.18.0",
     "babel-preset-stage-2": "^6.24.1",
     "found": "^0.3.11",
+    "idb": "^2.1.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
     "react-spinkit": "^3.0.0",
     "redux": "^4.0.0",
-    "redux-promise-middleware": "^5.1.1"
+    "redux-promise-middleware": "^5.1.1",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

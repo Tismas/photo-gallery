@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Gallery from './gallery/Gallery';
 
-import { fetchPhotos } from '../store/actions/photosActions';
+import { fetchPhotos, getCachedPhotos } from '../store/actions/photosActions';
 import { changeSearchValue } from '../store/actions/metaActions';
 import withInfiniteScroll from './HOC/withInfiniteScroll';
 
@@ -17,6 +17,10 @@ class Home extends Component {
 
         this.onChange = this.onChange.bind(this);
         this.handleSubmitByEnter = this.handleSubmitByEnter.bind(this);
+    }
+
+    componentWillMount() {
+        this.props.dispatch(getCachedPhotos);
     }
 
     search() {
@@ -36,9 +40,10 @@ class Home extends Component {
     render() {
         return (
             <div className="home-container">
-                <div>
+                <div className="search-container">
                     <input
                         type="text"
+                        placeholder="Search..."
                         className="search-input"
                         value={this.state.searchValue}
                         onKeyDown={this.handleSubmitByEnter}

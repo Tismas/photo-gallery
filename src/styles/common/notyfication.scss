@@ -1,0 +1,32 @@
+.notyfication-container {
+    position: fixed;
+    bottom: 0;
+
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    background-color: $text-color;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.notyfication-message {
+    font-weight: bold;
+    font-size: 1em;
+}
+.notyfication-button {
+    font-weight: 500;
+    font-size: 0.8em;
+    width: 100px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: $primary-color;
+    
+    margin-left: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

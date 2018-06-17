@@ -11,3 +11,16 @@ export function changeSearchValue({searchValue = ''} = {}) {
         payload: searchValue
     }
 }
+
+export function showInstallAppNotyfication(deferredPrompt) {
+    return {
+        type: "SHOW_INSTALL_NOTYFICATION",
+        payload: deferredPrompt
+    }
+}
+
+export function discardInstallNotyfication() {
+    return {
+        type: "DISCARD_INSTALL_NOTYFICATION"
+    }
+}

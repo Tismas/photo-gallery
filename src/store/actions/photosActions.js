@@ -1,12 +1,14 @@
 import axios from 'axios';
 
+import { getCachedPhotosFromDb } from '../../sw/db';
+
 const baseParams = {
     api_key: '1a475b8d3b2322b93260d9afa8145353',
     format: 'json',
     nojsoncallback: 1,
     per_page: 100,
     extras: 'description, date_upload, owner_name, url_s, geo'
-}
+};
 
 export function fetchPhotos({page=1, search=''} = {}) {
     return {
@@ -20,7 +22,7 @@ export function fetchPhotos({page=1, search=''} = {}) {
                 page
             }
         })
-    }
+    };
 }
 
 export function fetchUserPhotos({userID, page=1} = {}) {
@@ -36,5 +38,14 @@ export function fetchUserPhotos({userID, page=1} = {}) {
                 page
             }
         })
-    }
+    };
+}
+
+export function getCachedPhotos(dispatch) {
+    getCachedPhotosFromDb().then(photos => {
+        dispatch({
+            type: 'GET_CACHED_PHOTOS',
+            payload: photos.reverse().slice(0, 100)
+        });
+    })
 }

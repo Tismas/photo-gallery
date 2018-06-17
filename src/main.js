@@ -5,14 +5,18 @@ import { Provider } from 'react-redux';
 import { createConnectedRouter, createRender, resolver } from 'found';
 import { Actions } from 'farce';
 
+import { addServiceWorker } from './sw/addServiceWorker';
+import { homescreenPrompt } from './homescreenPrompt';
 import store from './store';
 
 store.dispatch(Actions.init());
+addServiceWorker(store);
+homescreenPrompt(store);
 
 const ConnectedRouter = createConnectedRouter({
     render: createRender({
         renderError: (
-            { error }, // eslint-disable-line react/prop-types
+            { error },
         ) => <div>{error.status === 404 ? 'Not found' : 'Error'}</div>,
     }),
 });

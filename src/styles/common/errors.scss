@@ -1,7 +1,16 @@
 .error-container {
-    width: 100%;
-    margin-top: 200px;
-    text-align: center;
+    width: 255px;
+    position: fixed;
+    left: 50px;
+    bottom: 50px;
+    height: 130px;
+    background-color: $text-color;
+    color: white;
+    border-radius: 4px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
 }
 .error-header {
     font-weight: bold;
@@ -10,4 +19,14 @@
 .error-message {
     font-weight: 500;
     font-size: 1.2em;
+}
+.error-button {
+    border: none;
+    border-radius: 4px;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    background: #2db8fb;
+    color: white;
+    font-weight: bold;
 }

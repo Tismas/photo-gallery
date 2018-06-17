@@ -13,7 +13,7 @@ class User extends Component {
         return (
             <div className="user-container">
                 <Link to="/" className="go-back-button"> Go back </Link>
-                <Gallery photos={this.props.photos} />
+                <Gallery photos={this.props.photos.filter(photo => photo.user_id == this.props.params.id)} />
             </div>
         );
     }

@@ -11,7 +11,8 @@ export default function withSubscription(WrappedComponent, action) {
         fetchingMore: store.photos.fetchingMore,
         lastLocation: store.meta.lastLocation,
         page: store.photos.page,
-        searchValue: store.meta.searchValue
+        searchValue: store.meta.searchValue,
+        error: store.photos.error
     }))
     class Result extends Component {
         constructor() {
@@ -20,6 +21,7 @@ export default function withSubscription(WrappedComponent, action) {
         }
 
         componentWillMount() {
+            if(this.props.error) return;
             if (this.props.photos.length == 0 || this.props.lastLocation.pathname != this.props.location.pathname) {
                 this.props.dispatch(action({ userID: this.props.params.id }));
                 this.props.dispatch(changeSearchValue({ searchValue: '' }));

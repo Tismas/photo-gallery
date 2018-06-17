@@ -4,7 +4,8 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    app: './src/main.js'
+    app: './src/main.js',
+    sw: './src/sw/index.js'
   },
   resolve: {
     extensions: [".js", ".jsx", ".json"]

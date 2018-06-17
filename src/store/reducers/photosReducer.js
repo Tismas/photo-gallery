@@ -1,5 +1,7 @@
+import { addPhotoToDb } from '../../sw/db';
+
 const photosMapper = photo => {
-    return {
+    const photoObj = {
         description: photo.description._content,
         uploadDate: new Date(Number(photo.dateupload * 1000)), // API returns number of seconds since 1970, we need miliseconds
         user_id: photo.owner,
@@ -8,6 +10,8 @@ const photosMapper = photo => {
         url: photo.url_s,
         location: {lat: photo.latitude, long: photo.longitude}
     }
+    addPhotoToDb(photoObj);
+    return photoObj;
 }
 
 const photosReducer = (state = {
@@ -18,6 +22,9 @@ const photosReducer = (state = {
     photos: []
 }, action) => {
     switch (action.type) {
+        case 'GET_CACHED_PHOTOS':
+            if (state.photos.length > 0) return state;
+            return {...state, fetched: true, fetching: false, photos: action.payload}
         case 'FETCH_PHOTOS_PENDING':
             return { ...state, fetching: true }
         case 'FETCH_PHOTOS_REJECTED':
