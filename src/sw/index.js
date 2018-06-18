@@ -1,4 +1,4 @@
-export const staticCache = 'photo-gallery-v7';
+export const staticCache = 'photo-gallery-v8';
 export const imagesCache = 'photo-images-v1';
 const actualCaches = [staticCache, imagesCache];
 
@@ -6,7 +6,7 @@ self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(staticCache).then(cache => {
             return cache.addAll([
-                '/',
+                './',
                 'app.bundle.js',
                 'app.css',
                 'manifest.json',
