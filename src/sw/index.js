@@ -1,4 +1,4 @@
-export const staticCache = 'photo-gallery-v6';
+export const staticCache = 'photo-gallery-v7';
 export const imagesCache = 'photo-images-v1';
 const actualCaches = [staticCache, imagesCache];
 
@@ -29,7 +29,6 @@ self.addEventListener('activate', event => {
             )
         })
     );
-    event.waitUntil(caches.delete('photo-gallery-v' + (cacheVersion - 1)));
 });
 
 self.addEventListener('fetch', event => {
