@@ -9,6 +9,11 @@ import { addServiceWorker } from './sw/addServiceWorker';
 import { homescreenPrompt } from './homescreenPrompt';
 import store from './store';
 
+import './images/icon-512.png';
+import './images/icon-192.png';
+import './manifest.json';
+
+
 store.dispatch(Actions.init());
 addServiceWorker(store);
 homescreenPrompt(store);

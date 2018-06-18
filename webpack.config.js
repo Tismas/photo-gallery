@@ -34,7 +34,24 @@ module.exports = {
       },
       {
         test: /\.(eot|otf|svg|ttf|woff|woff2|png)$/,
-        use: 'file-loader'
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'images/'
+            }
+          }
+        ]
+      },
+      {
+        type: 'javascript/auto',
+        test: /\.json$/,
+        exclude: /(node_modules|bower_components)/,
+        use: [{
+          loader: 'file-loader',
+          options: { name: '[name].[ext]' },
+        }],
       }
     ]
   },
