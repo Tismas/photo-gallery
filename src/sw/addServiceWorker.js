@@ -7,7 +7,7 @@ const watchForStateChange = (sw, store) => {
 }
 
 const registerServiceWorker = store => {
-    navigator.serviceWorker.register('/sw.bundle.js').then(reg => {
+    navigator.serviceWorker.register('sw.bundle.js').then(reg => {
         if (!navigator.serviceWorker.controller) return;
 
         if (reg.waiting) {
