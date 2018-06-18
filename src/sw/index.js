@@ -1,4 +1,4 @@
-export const staticCache = 'photo-gallery-v5';
+export const staticCache = 'photo-gallery-v6';
 export const imagesCache = 'photo-images-v1';
 const actualCaches = [staticCache, imagesCache];
 
@@ -7,9 +7,9 @@ self.addEventListener('install', event => {
         caches.open(staticCache).then(cache => {
             return cache.addAll([
                 '/',
-                '/app.bundle.js',
-                '/app.css',
-                '/manifest.json',
+                'app.bundle.js',
+                'app.css',
+                'manifest.json',
                 'https://fonts.googleapis.com/css?family=Roboto:400,500,700',
                 'https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu72xKOzY.woff2',
                 'https://fonts.gstatic.com/s/roboto/v18/KFOlCnqEu92Fr1MmEU9fCRc4EsA.woff2',
